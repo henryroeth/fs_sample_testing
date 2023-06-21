@@ -6,6 +6,8 @@ PopulationSD=0.2 #this is the population standard deviation
 
 z.test(x=Sample, alternative = "less", mu = PopulationMean, sigma.x = PopulationSD, conf.level = 0.95)
 
+#emma lol
+
 #the parameters needed to run a Z-test are self-explanatory. 
 #x is the array with your sample data. alternative is the type 
 #of test to run, in this case we want to check is the sample is 
