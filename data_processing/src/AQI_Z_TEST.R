@@ -8,6 +8,8 @@ z.test(x=Sample, alternative = "less", mu = PopulationMean, sigma.x = Population
 
 #emma lol
 
+#hi
+
 #the parameters needed to run a Z-test are self-explanatory. 
 #x is the array with your sample data. alternative is the type 
 #of test to run, in this case we want to check is the sample is 
