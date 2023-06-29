@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 from pandas import *
  
 # reading CSV file
-data = read_csv("2023-06-28&29.csv")
+data = read_csv('2023-06-28&29.csv')
  
 # converting column data to list
 time = data['Time'].tolist()
