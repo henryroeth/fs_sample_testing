@@ -15,6 +15,8 @@ pm_readings = data['Pm2.5(ug/m3)'].tolist()
 wind_readings = data['Wind(mph)'].tolist()
 print(time)
 print(pm_readings)
+
+
 x1 = time
 y1 = pm_readings
 
