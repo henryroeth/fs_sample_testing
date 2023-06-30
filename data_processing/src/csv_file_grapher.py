@@ -28,13 +28,13 @@ y1 = pm_readings[1:len(pm_readings):60]
 
 
 # plotting the line 1 points 
-plt.plot(x1, y1, label = "PM.5(ug/m3)")
+plt.plot(x1, y1, label = "PM2.5(ug/m3)")
 
 # line 2 points
 x2 = time[1:len(time):60]
 y2 = wind_readings[1:len(wind_readings):60]
 # plotting the line 2 points 
-plt.plot(x2, y2, label = "Wind Speed")
+plt.plot(x2, y2, label = "Wind Speed(mph)")
 
 # x3 = time[1:len(time):60]
 # y3 = wind_directions[1:len(wind_directions):60]
@@ -48,8 +48,8 @@ plt.ylabel('Pm2.5(ug/m3)/Wind(mph)')
 # giving a title to my graph
 plt.title('Pm2.5 Readings Over Time 2023-06-28(10am)-29(10am)')
 ax = plt.gca()
-ax.set_xticklabels(ax.get_xticks(), rotation = 70)
-# ax.set_yticklabels(ax.get_yticks(), rotation = 45)
+ax.set_xticklabels(ax.get_xticks(), rotation = 45)
+ax.set_yticklabels(ax.get_yticks(), rotation = 0)
 # show a legend on the plot
 plt.legend()
   
