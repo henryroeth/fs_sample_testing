@@ -1,5 +1,5 @@
 # Reads CSV file 
-read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-06-28&29.CSV")
+read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-06-29&30.CSV")
 
 #Where column name is stored
 col_name=read_csv$Pm2.5.ug.m3.
@@ -17,7 +17,7 @@ print(result <- sd(col_name))
 print(result <- median(col_name))
 
 #Plots the data into a visual display by converting file data into a matrix
-plot(x <- data.matrix(col_name2), y <- data.matrix(col_name), xlab = 'Wind(mph)', ylab = 'Pm2.5(ug/m3)', main = 'Wind & Pm2.5 Sinusoidal Regression Curves 2023-06-(10am)28to(10am)29')
+plot(x <- data.matrix(col_name2), y <- data.matrix(col_name), xlab = 'Wind(mph)', ylab = 'Pm2.5(ug/m3)', main = 'Wind & Pm2.5 Sinusoidal Regression Curves 2023-06-(10am)29to(10am)30')
 df <- data.frame(x=data.matrix(col_name2),
                  y=data.matrix(col_name))
 fit1 <- lm(y~x, data=df)
