@@ -5,6 +5,7 @@ read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-06-
 col_name=read_csv$Pm2.5.ug.m3.
 col_name1=read_csv$Time
 col_name2=read_csv$Wind.mph.
+col_name3=read_csv$Wind.Direction...
 
 #Find the mean the specified column
 print(result <- mean(col_name))
@@ -16,10 +17,10 @@ print(result <- sd(col_name))
 print(result <- median(col_name))
 
 #Plots the data into a visual display by converting file data into a matrix
-plot(x <- data.matrix(col_name2), y <- data.matrix(col_name), xlab = 'Wind(mph)', ylab = 'Pm2.5(ug/m3)', main = 'Wind & Pm2.5 Sinusoidal Regression Curves 2023-06-(10am)29to(10am)30')
+plot(x <- data.matrix(col_name2), y <- data.matrix(col_name), xlab = 'Wind(mph)', ylab = 'Pm2.5(ug/m3)', main = 'Wind & Pm2.5 Sinusoidal Regression Curves 2023-06-(10am)28to(10am)29')
 df <- data.frame(x=data.matrix(col_name2),
                  y=data.matrix(col_name))
-print(fit1 <- lm(y~x, data=df))
+fit1 <- lm(y~x, data=df)
 fit2 <- lm(y~poly(x,2,raw=TRUE), data=df)
 fit3 <- lm(y~poly(x,3,raw=TRUE), data=df)
 fit4 <- lm(y~poly(x,4,raw=TRUE), data=df)
