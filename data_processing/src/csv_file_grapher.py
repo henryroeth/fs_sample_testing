@@ -47,7 +47,7 @@ plt.xlabel('Time(hrs)')
 # naming the y axis
 plt.ylabel('Pm2.5(ug/m3)/Wind(mph)')
 # giving a title to my graph
-plt.title('Pm2.5 Readings Over Time 2023-06-29(10am)-30(10am)')
+plt.title('Pm2.5 Readings Over Time 2023-06-28(10am)-29(10am)')
 ax = plt.gca()
 ax.set_xticklabels(ax.get_xticks(), rotation = 45)
 ax.set_yticklabels(ax.get_yticks(), rotation = 0)
