@@ -1,5 +1,5 @@
 # Reads CSV file 
-read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-06-29&30.CSV")
+read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-01'02.CSV")
 
 #Where column name is stored
 col_name=read_csv$Pm2.5.ug.m3.
@@ -16,15 +16,22 @@ print(result <- sd(col_name))
 #Find the median the specified column
 print(result <- median(col_name))
 
-#Plots the data into a visual display by converting file data into a matrix
-plot(x <- data.matrix(col_name2), y <- data.matrix(col_name), xlab = 'Wind(mph)', ylab = 'Pm2.5(ug/m3)', main = 'Wind & Pm2.5 Sinusoidal Regression Curves 2023-06-(10am)29to(10am)30')
+#data set
 df <- data.frame(x=data.matrix(col_name2),
                  y=data.matrix(col_name))
+
+#Plots the data into a visual display by converting file data into a matrix
+plot(df, xlab = 'Wind(mph)', ylab = 'Pm2.5(ug/m3)', main = 'Wind & Pm2.5 Sinusoidal Regression Curves 2023-06-(10am)29to(10am)30')
+
+#regression lines
 fit1 <- lm(y~x, data=df)
 fit2 <- lm(y~poly(x,2,raw=TRUE), data=df)
 fit3 <- lm(y~poly(x,3,raw=TRUE), data=df)
 fit4 <- lm(y~poly(x,4,raw=TRUE), data=df)
 fit5 <- lm(y~poly(x,5,raw=TRUE), data=df)
+
+print(residuals(fit4))
+print(deviance(fit4))
 
 x_axis <- seq(0, 9, length=2000)
 
