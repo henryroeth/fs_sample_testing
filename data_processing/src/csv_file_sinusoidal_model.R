@@ -1,11 +1,11 @@
 # dependencies
 
 # reads a specified CSV file
-read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-02'03.CSV")
+read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\combined.CSV")
 read_csv1 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-01'02.CSV")
 read_csv2 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-02'03.CSV")
 
-# variable names Where column data is stored
+# variable names where column data is stored
 file = read_csv
 
 pm2.5 = file$Pm2.5.ug.m3.
