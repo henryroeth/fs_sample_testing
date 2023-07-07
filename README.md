@@ -1,5 +1,5 @@
 # James H. Barrow Biological Field Station Internship
-## Development & Deployment of Weather and Trace Gas Monitoring Systems
+### Development & Deployment of Weather and Trace Gas Monitoring Systems
 #### Supervisor
 [James Kercher, Ph.D.](https://www.hiram.edu/faculty-and-staff/james-kercher/)
 #### Internship Description
