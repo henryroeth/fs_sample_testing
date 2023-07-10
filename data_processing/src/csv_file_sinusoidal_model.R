@@ -1,7 +1,7 @@
 # dependencies
 
 # reads a specified CSV file
-read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\combined.CSV")
+read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\beta_records\\2023-06-29&30.CSV")
 read_csv1 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-01'02.CSV")
 read_csv2 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-02'03.CSV")
 
@@ -15,17 +15,17 @@ wind_direction = file$Wind.Direction...
 
 # graph labels
 
-title = 'Wind & Pm2.5 Sinusoidal Regression Curves 2023-06-(10am)29to(10am)30'
-xlabel = 'Wind(mph)'
-ylabel = 'Pm2.5(ug/m3)'
+title = 'Standardized Residuals Under Two Deviations 2023-06-(10am)29to(10am)30'
+xlabel = 'Index'
+ylabel = 'Standardized Residual Value'
 
 #prints a statistical rundown of the data to the console
 
-print(result <- mean(col_name)) # mean
+mean <- result <- mean(pm2.5) # mean
 
-print(result <- sd(col_name)) #standard deviation
+sd <- result <- sd(pm2.5) #standard deviation
 
-print(result <- median(col_name)) #median
+median <- result <- median(pm2.5) #median
 
 # stores csv file data into a frame
 
@@ -56,3 +56,12 @@ lines(x_axis, predict(fit2, data.frame(x=x_axis)), col='red')
 lines(x_axis, predict(fit3, data.frame(x=x_axis)), col='purple')
 lines(x_axis, predict(fit4, data.frame(x=x_axis)), col='blue')
 lines(x_axis, predict(fit5, data.frame(x=x_axis)), col='orange')
+
+standard_res <- data.matrix(rstandard(fit4))
+no_res_outliers <- subset(standard_res, abs(standard_res) < 2)
+
+data_usage <- (length(no_res_outliers))/(length(standard_res))
+data_usage
+
+plot(no_res_outliers, xlab = xlabel, ylab = ylabel, main = title)
+abline(h=0, col = 'blue')
