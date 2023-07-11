@@ -15,7 +15,7 @@ wind_direction = file$Wind.Direction...
 
 # graph labels
 
-title = 'Standardized Residuals Under Two Deviations 2023-06-(10am)29to(10am)30'
+title = 'Standardized Residuals Under Two Deviations'
 xlabel = 'Index'
 ylabel = 'Standardized Residual Value'
 
@@ -60,8 +60,8 @@ lines(x_axis, predict(fit5, data.frame(x=x_axis)), col='orange')
 standard_res <- data.matrix(rstandard(fit4))
 no_res_outliers <- subset(standard_res, abs(standard_res) < 2)
 
-data_usage <- (length(no_res_outliers))/(length(standard_res))
+data_usage <- (length(standard_res))/(length(no_res_outliers))
 data_usage
 
-plot(no_res_outliers, xlab = xlabel, ylab = ylabel, main = title)
+plot(no_res_outliers, xlab = xlabel, ylab = ylabel, main = paste(title, "(", (trunc(data_usage*100)),"% Outlier Exclusion)"))
 abline(h=0, col = 'blue')
