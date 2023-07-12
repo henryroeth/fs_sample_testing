@@ -8,7 +8,7 @@
 File myFile;
 const int chipSelect = 10;
 
-String time ;
+String time;
 tmElements_t tm;
 
 

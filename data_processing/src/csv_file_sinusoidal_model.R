@@ -1,15 +1,15 @@
-# dependencies
+# libraries
 
 # reads a specified CSV file
-read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\beta_records\\2023-06-29&30.CSV")
-read_csv1 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-01'02.CSV")
-read_csv2 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-02'03.CSV")
+read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\beta_records\\2023-06-29&30.CSV", header = TRUE, stringsAsFactors = FALSE)
+read_csv1 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-01'02.CSV", header = TRUE, stringsAsFactors = FALSE)
+read_csv2 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-02'03.CSV", header = TRUE, stringsAsFactors = FALSE)
 
 # variable names where column data is stored
 file = read_csv
 
 pm2.5 = file$Pm2.5.ug.m3.
-time = data.frame(file$Time)
+time = file$Time
 wind = file$Wind.mph.
 wind_direction = file$Wind.Direction...
 
@@ -29,9 +29,9 @@ median <- result <- median(pm2.5) #median
 
 # stores csv file data into a frame
 
-df <- data.frame(x=data.matrix(wind), y=data.matrix(pm2.5))
+df <- data.frame(x = wind, y = pm2.5)
 
-# plots the data into a visual display by converting file data into a matrix
+# creates a plot using 'df' where file data was stored
 
 plot(df, xlab = xlabel, ylab = ylabel, main = title)
 
@@ -60,8 +60,8 @@ lines(x_axis, predict(fit5, data.frame(x=x_axis)), col='orange')
 standard_res <- data.matrix(rstandard(fit4))
 no_res_outliers <- subset(standard_res, abs(standard_res) < 2)
 
-data_usage <- (length(standard_res))/(length(no_res_outliers))
+data_usage <- (length(no_res_outliers))/(length(standard_res))
 data_usage
 
-plot(no_res_outliers, xlab = xlabel, ylab = ylabel, main = paste(title, "(", (trunc(data_usage*100)),"% Outlier Exclusion)"))
+plot(no_res_outliers, xlab = xlabel, ylab = ylabel, main = paste(title, "(", (100-trunc(data_usage*100)),"% Outlier Exclusion)"))
 abline(h=0, col = 'blue')
