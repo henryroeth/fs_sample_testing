@@ -3,7 +3,7 @@ SoftwareSerial pmsSerial(2, 3);
  
 void setup() {
   // our debugging output
-  Serial.begin(115200);
+  Serial.begin(9600);
  
   // sensor baud rate is 9600
   pmsSerial.begin(9600);
