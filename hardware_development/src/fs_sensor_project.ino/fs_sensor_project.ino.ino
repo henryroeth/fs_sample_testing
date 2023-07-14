@@ -1,13 +1,22 @@
+#include <PMS.h>
 #include <LiquidCrystal_I2C.h>
 #include "DHT.h"
+#include "SoftwareSerial.h"
 #define DHTPIN 2
 #define DHTTYPE DHT22
 
-LiquidCrystal_I2C lcd(0x27, 20, 4);  // I2C address 0x3F, 16 column and 2 rows
+SoftwareSerial Serial1(3, 4); // RX, TX
+ 
+PMS pms(Serial1);
+PMS::DATA data;
+
+LiquidCrystal_I2C lcd(0x27, 20, 4);  
 DHT dht(DHTPIN, DHTTYPE);
+
 
 void setup()
 {
+  Serial1.begin(9600);
   Serial.begin(9600);
   dht.begin();     // initialize the sensor
   lcd.init();      // initialize the lcd
@@ -23,10 +32,21 @@ void loop()
   float tempF = dht.readTemperature(true);
   lcd.clear();
   // check if any reads failed
-  if (isnan(humi) || isnan(tempC)) {
+  if ((!pms.read(data)) || (isnan(humi) || isnan(tempC) || isnan(tempF))) {
     lcd.setCursor(0, 0);
-    lcd.print("Failed");
+    lcd.print("Sensor Failure...");
+    lcd.setCursor(0,2);
+    if(!pms.read(data)) {
+      lcd.print("PMS Malfunction");
+    }
+    if (isnan(humi) || isnan(tempC) || isnan(tempF)) {
+      lcd.print("THS Malfunction");
+    }
+    if ((!pms.read(data)) && (isnan(humi) || isnan(tempC) || isnan(tempF))) {
+      lcd.print("Total Malfunction");
+    }
   } else {
+    //serial monitor data
     Serial.print("Humidity: ");
     Serial.print(humi);
     Serial.println("%");
@@ -35,16 +55,23 @@ void loop()
     Serial.print("°C ~ ");
     Serial.print(tempF);
     Serial.println("°F");
+    //LCD data
+    lcd.setCursor(0, 0);
+    lcd.print("Indoor Environment");
+    lcd.setCursor(0, 1);
 
-    lcd.setCursor(0, 2);  // start to print at the first row
+    lcd.setCursor(0, 2);
     lcd.print("Temperature: ");
-    lcd.print(tempF);     // print the temperature
-    lcd.print((char)223); // print ° character
+    lcd.print(tempF);
+    lcd.print((char)223);
     lcd.print("F");
 
-    lcd.setCursor(0, 3);  // start to print at the second row
+    lcd.setCursor(0, 3);
     lcd.print("Humidity: ");
-    lcd.print(humi);      // print the humidity
+    lcd.print(humi);
     lcd.print("%");
+
+    lcd.setCursor(0, 1);
+    lcd.print("PM2.5: " + String(data.PM_AE_UG_2_5) + "(ug/m3)");
   }
 }
