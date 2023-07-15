@@ -11,41 +11,111 @@ PMS pms(Serial1);
 PMS::DATA data;
 
 LiquidCrystal_I2C lcd(0x27, 20, 4);  
-DHT dht(DHTPIN, DHTTYPE);
+DHT dht(DHTPIN, DHTTYPE); 
 
+int green = 13;
+int yellow = 12;
+int orange = 11;
+int red = 10;
+int purple = 9;
 
 void setup()
 {
   Serial1.begin(9600);
   Serial.begin(9600);
-  dht.begin();     // initialize the sensor
-  lcd.init();      // initialize the lcd
-  lcd.backlight(); // open the backlight 
+  dht.begin();    
+  lcd.init();      
+  lcd.backlight(); 
+  pinMode(green, OUTPUT);
+  pinMode(yellow, OUTPUT);
+  pinMode(orange, OUTPUT);
+  pinMode(red, OUTPUT);
+  pinMode(purple, OUTPUT); 
 }
 
 void loop()
 {
-  delay(2000); // wait a few seconds between measurements
+  delay(2000); 
 
-  float humi  = dht.readHumidity();    // read humidity
-  float tempC = dht.readTemperature(); // read temperature
+  float humi  = dht.readHumidity();    
+  float tempC = dht.readTemperature(); 
   float tempF = dht.readTemperature(true);
+  int pm25 = data.PM_AE_UG_2_5;
+  if(pm25 <= 12) {
+    digitalWrite(green, HIGH);
+    digitalWrite(yellow, LOW);
+    digitalWrite(orange, LOW);
+    digitalWrite(red, LOW);
+    digitalWrite(purple, LOW);
+  }
+  if(pm25 > 12 && pm25 <= 35) {
+    digitalWrite(green, LOW);
+    digitalWrite(yellow, HIGH);
+    digitalWrite(orange, LOW);
+    digitalWrite(red, LOW);
+    digitalWrite(purple, LOW);
+  }
+  if(pm25 > 35 && pm25 <= 55) {
+    digitalWrite(green, LOW);
+    digitalWrite(yellow, LOW);
+    digitalWrite(orange, HIGH);
+    digitalWrite(red, LOW);
+    digitalWrite(purple, LOW);
+  }
+  if(pm25 > 55 && pm25 <= 150) {
+    digitalWrite(green, LOW);
+    digitalWrite(yellow, LOW);
+    digitalWrite(orange, LOW);
+    digitalWrite(red, HIGH);
+    digitalWrite(purple, LOW);
+  }
+  if(pm25 > 150 && pm25 <= 250) {
+    digitalWrite(green, LOW);
+    digitalWrite(yellow, LOW);
+    digitalWrite(orange, LOW);
+    digitalWrite(red, LOW);
+    digitalWrite(purple, HIGH);
+  }
+  if(pm25 > 250 && pm25 <= 500) {
+    digitalWrite(green, HIGH);
+    digitalWrite(yellow, HIGH);
+    digitalWrite(orange, HIGH);
+    digitalWrite(red, HIGH);
+    digitalWrite(purple, HIGH);
+  }
   lcd.clear();
   // check if any reads failed
-  if ((!pms.read(data)) || (isnan(humi) || isnan(tempC) || isnan(tempF))) {
+  if ((!pms.read(data)) && (!isnan(humi) || !isnan(tempC) || !isnan(tempF))) {  
     lcd.setCursor(0, 0);
-    lcd.print("Sensor Failure...");
+    lcd.print("Sensor failure...");
+    lcd.setCursor(0,1);
+    lcd.print("PMS malfunction!");
     lcd.setCursor(0,2);
-    if(!pms.read(data)) {
-      lcd.print("PMS Malfunction");
-    }
-    if (isnan(humi) || isnan(tempC) || isnan(tempF)) {
-      lcd.print("THS Malfunction");
-    }
-    if ((!pms.read(data)) && (isnan(humi) || isnan(tempC) || isnan(tempF))) {
-      lcd.print("Total Malfunction");
-    }
-  } else {
+    lcd.print("For maintenance call");
+    lcd.setCursor(0,3);
+    lcd.print("5407509530.");
+  }
+  if ((isnan(humi) || isnan(tempC) || isnan(tempF)) && (pms.read(data))) {  
+    lcd.setCursor(0, 0);
+    lcd.print("Sensor failure...");
+    lcd.setCursor(0,1);
+    lcd.print("THS malfunction!");
+    lcd.setCursor(0,2);
+    lcd.print("For maintenance call");
+    lcd.setCursor(0,3);
+    lcd.print("5407509530.");
+  }
+  if ((!pms.read(data)) && (isnan(humi) || isnan(tempC) || isnan(tempF))) {  
+    lcd.setCursor(0, 0);
+    lcd.print("Sensor failure...");
+    lcd.setCursor(0,1);
+    lcd.print("TOTAL malfunction!");
+    lcd.setCursor(0,2);
+    lcd.print("For maintenance call");
+    lcd.setCursor(0,3);
+    lcd.print("5407509530.");
+  }
+  if ((pms.read(data)) && (!isnan(humi) && !isnan(tempC) && !isnan(tempF))) {
     //serial monitor data
     Serial.print("Humidity: ");
     Serial.print(humi);
@@ -72,6 +142,6 @@ void loop()
     lcd.print("%");
 
     lcd.setCursor(0, 1);
-    lcd.print("PM2.5: " + String(data.PM_AE_UG_2_5) + "(ug/m3)");
+    lcd.print("PM2.5: " + String(pm25) + "(ug/m3)");
   }
 }
