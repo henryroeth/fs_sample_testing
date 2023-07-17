@@ -41,6 +41,7 @@ void loop()
   float tempC = dht.readTemperature(); 
   float tempF = dht.readTemperature(true);
   int pm25 = data.PM_AE_UG_2_5;
+  //green light on
   if(pm25 <= 12) {
     digitalWrite(green, HIGH);
     digitalWrite(yellow, LOW);
@@ -48,6 +49,7 @@ void loop()
     digitalWrite(red, LOW);
     digitalWrite(purple, LOW);
   }
+  //yellow light on
   if(pm25 > 12 && pm25 <= 35) {
     digitalWrite(green, LOW);
     digitalWrite(yellow, HIGH);
@@ -55,6 +57,7 @@ void loop()
     digitalWrite(red, LOW);
     digitalWrite(purple, LOW);
   }
+  //orange light on
   if(pm25 > 35 && pm25 <= 55) {
     digitalWrite(green, LOW);
     digitalWrite(yellow, LOW);
@@ -62,6 +65,7 @@ void loop()
     digitalWrite(red, LOW);
     digitalWrite(purple, LOW);
   }
+  //red light on
   if(pm25 > 55 && pm25 <= 150) {
     digitalWrite(green, LOW);
     digitalWrite(yellow, LOW);
@@ -69,6 +73,7 @@ void loop()
     digitalWrite(red, HIGH);
     digitalWrite(purple, LOW);
   }
+  //purple light on
   if(pm25 > 150 && pm25 <= 250) {
     digitalWrite(green, LOW);
     digitalWrite(yellow, LOW);
@@ -76,6 +81,7 @@ void loop()
     digitalWrite(red, LOW);
     digitalWrite(purple, HIGH);
   }
+  //all lights on
   if(pm25 > 250 && pm25 <= 500) {
     digitalWrite(green, HIGH);
     digitalWrite(yellow, HIGH);
@@ -109,7 +115,7 @@ void loop()
     lcd.setCursor(0, 0);
     lcd.print("Sensor failure...");
     lcd.setCursor(0,1);
-    lcd.print("TOTAL malfunction!");
+    lcd.print("All sensors!");
     lcd.setCursor(0,2);
     lcd.print("For maintenance call");
     lcd.setCursor(0,3);
@@ -129,10 +135,13 @@ void loop()
     lcd.setCursor(0, 0);
     lcd.print("Indoor Environment");
     lcd.setCursor(0, 1);
-
+    
     lcd.setCursor(0, 2);
-    lcd.print("Temperature: ");
-    lcd.print(tempF);
+    lcd.print("Temp: ");
+    lcd.print(round(10 * tempC) / 10);
+    lcd.print((char)223);
+    lcd.print("C  ");
+    lcd.print(round(10 * tempF) / 10);
     lcd.print((char)223);
     lcd.print("F");
 
