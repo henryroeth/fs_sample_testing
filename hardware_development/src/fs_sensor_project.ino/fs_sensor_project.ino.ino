@@ -1,17 +1,14 @@
-#include <PMS.h>
 #include <LiquidCrystal_I2C.h>
-#include "DHT.h"
-#include "SoftwareSerial.h"
-#define DHTPIN 2
-#define DHTTYPE DHT22
+#include <PMS.h>
+#include <SoftwareSerial.h>
 
-SoftwareSerial Serial1(3, 4); // RX, TX
- 
-PMS pms(Serial1);
+//SDA = A4;
+//SCL = A5;
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+SoftwareSerial pmSerial(2,3); // RX, TX
+
+PMS pms(pmSerial);
 PMS::DATA data;
-
-LiquidCrystal_I2C lcd(0x27, 20, 4);  
-DHT dht(DHTPIN, DHTTYPE); 
 
 int green = 13;
 int yellow = 12;
@@ -19,138 +16,122 @@ int orange = 11;
 int red = 10;
 int purple = 9;
 
-void setup()
+void setup() 
 {
-  Serial1.begin(9600);
+  pmSerial.begin(9600);
   Serial.begin(9600);
-  dht.begin();    
-  lcd.init();      
-  lcd.backlight(); 
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0);
   pinMode(green, OUTPUT);
   pinMode(yellow, OUTPUT);
   pinMode(orange, OUTPUT);
   pinMode(red, OUTPUT);
-  pinMode(purple, OUTPUT); 
+  pinMode(purple, OUTPUT);
+  lcd.print("Initializing");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing.");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing..");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing...");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing..");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing.");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing.");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing..");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing...");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing..");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing.");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing");
+  delay(500);
+  lcd.clear();
 }
 
-void loop()
-{
-  delay(2000); 
-
-  float humi  = dht.readHumidity();    
-  float tempC = dht.readTemperature(); 
-  float tempF = dht.readTemperature(true);
-  int pm25 = data.PM_AE_UG_2_5;
-  //green light on
-  if(pm25 <= 12) {
-    digitalWrite(green, HIGH);
-    digitalWrite(yellow, LOW);
-    digitalWrite(orange, LOW);
-    digitalWrite(red, LOW);
-    digitalWrite(purple, LOW);
-  }
-  //yellow light on
-  if(pm25 > 12 && pm25 <= 35) {
-    digitalWrite(green, LOW);
-    digitalWrite(yellow, HIGH);
-    digitalWrite(orange, LOW);
-    digitalWrite(red, LOW);
-    digitalWrite(purple, LOW);
-  }
-  //orange light on
-  if(pm25 > 35 && pm25 <= 55) {
-    digitalWrite(green, LOW);
-    digitalWrite(yellow, LOW);
-    digitalWrite(orange, HIGH);
-    digitalWrite(red, LOW);
-    digitalWrite(purple, LOW);
-  }
-  //red light on
-  if(pm25 > 55 && pm25 <= 150) {
-    digitalWrite(green, LOW);
-    digitalWrite(yellow, LOW);
-    digitalWrite(orange, LOW);
-    digitalWrite(red, HIGH);
-    digitalWrite(purple, LOW);
-  }
-  //purple light on
-  if(pm25 > 150 && pm25 <= 250) {
-    digitalWrite(green, LOW);
-    digitalWrite(yellow, LOW);
-    digitalWrite(orange, LOW);
-    digitalWrite(red, LOW);
-    digitalWrite(purple, HIGH);
-  }
-  //all lights on
-  if(pm25 > 250 && pm25 <= 500) {
-    digitalWrite(green, HIGH);
-    digitalWrite(yellow, HIGH);
-    digitalWrite(orange, HIGH);
-    digitalWrite(red, HIGH);
-    digitalWrite(purple, HIGH);
-  }
-  lcd.clear();
-  // check if any reads failed
-  if ((!pms.read(data)) && (!isnan(humi) || !isnan(tempC) || !isnan(tempF))) {  
+void loop() {
+  if (pms.readUntil(data)) {
+    lcd.clear();
     lcd.setCursor(0, 0);
-    lcd.print("Sensor failure...");
-    lcd.setCursor(0,1);
-    lcd.print("PMS malfunction!");
-    lcd.setCursor(0,2);
-    lcd.print("For maintenance call");
-    lcd.setCursor(0,3);
-    lcd.print("5407509530.");
-  }
-  if ((isnan(humi) || isnan(tempC) || isnan(tempF)) && (pms.read(data))) {  
-    lcd.setCursor(0, 0);
-    lcd.print("Sensor failure...");
-    lcd.setCursor(0,1);
-    lcd.print("THS malfunction!");
-    lcd.setCursor(0,2);
-    lcd.print("For maintenance call");
-    lcd.setCursor(0,3);
-    lcd.print("5407509530.");
-  }
-  if ((!pms.read(data)) && (isnan(humi) || isnan(tempC) || isnan(tempF))) {  
-    lcd.setCursor(0, 0);
-    lcd.print("Sensor failure...");
-    lcd.setCursor(0,1);
-    lcd.print("All sensors!");
-    lcd.setCursor(0,2);
-    lcd.print("For maintenance call");
-    lcd.setCursor(0,3);
-    lcd.print("5407509530.");
-  }
-  if ((pms.read(data)) && (!isnan(humi) && !isnan(tempC) && !isnan(tempF))) {
-    //serial monitor data
-    Serial.print("Humidity: ");
-    Serial.print(humi);
-    Serial.println("%");
-    Serial.print("Temp: ");
-    Serial.print(tempC);
-    Serial.print("°C ~ ");
-    Serial.print(tempF);
-    Serial.println("°F");
-    //LCD data
-    lcd.setCursor(0, 0);
-    lcd.print("Indoor Environment");
+    lcd.print("Particulate Matter");
+    Serial.println("Particulate Matter");
     lcd.setCursor(0, 1);
-    
+    lcd.print("PM1.0 : " + String(data.PM_AE_UG_1_0) + "(ug/m3)");
+    Serial.println("PM1.0 : " + String(data.PM_AE_UG_1_0) + "(ug/m3)");
     lcd.setCursor(0, 2);
-    lcd.print("Temp: ");
-    lcd.print(round(10 * tempC) / 10);
-    lcd.print((char)223);
-    lcd.print("C  ");
-    lcd.print(round(10 * tempF) / 10);
-    lcd.print((char)223);
-    lcd.print("F");
-
+    lcd.print("PM2.5 : " + String(data.PM_AE_UG_2_5) + "(ug/m3)");
+    Serial.println("PM2.5 : " + String(data.PM_AE_UG_2_5) + "(ug/m3)");
     lcd.setCursor(0, 3);
-    lcd.print("Humidity: ");
-    lcd.print(humi);
-    lcd.print("%");
-
-    lcd.setCursor(0, 1);
-    lcd.print("PM2.5: " + String(pm25) + "(ug/m3)");
-  }
+    lcd.print("PM10  : " + String(data.PM_AE_UG_10_0) + "(ug/m3)");
+    Serial.println("PM10  : " + String(data.PM_AE_UG_10_0) + "(ug/m3)");
+      //green light on
+    if(data.PM_AE_UG_2_5 <= 12) {
+      digitalWrite(green, HIGH);
+      digitalWrite(yellow, LOW);
+      digitalWrite(orange, LOW);
+      digitalWrite(red, LOW);
+      digitalWrite(purple, LOW);
+    }
+    //yellow light on
+    if(data.PM_AE_UG_2_5 > 12 && data.PM_AE_UG_2_5 <= 35) {
+      digitalWrite(green, LOW);
+      digitalWrite(yellow, HIGH);
+      digitalWrite(orange, LOW);
+      digitalWrite(red, LOW);
+      digitalWrite(purple, LOW);
+    }
+    //orange light on
+    if(data.PM_AE_UG_2_5 > 35 && data.PM_AE_UG_2_5 <= 55) {
+      digitalWrite(green, LOW);
+      digitalWrite(yellow, LOW);
+      digitalWrite(orange, HIGH);
+      digitalWrite(red, LOW);
+      digitalWrite(purple, LOW);
+    }
+    //red light on
+    if(data.PM_AE_UG_2_5 > 55 && data.PM_AE_UG_2_5 <= 150) {
+      digitalWrite(green, LOW);
+      digitalWrite(yellow, LOW);
+      digitalWrite(orange, LOW);
+      digitalWrite(red, HIGH);
+      digitalWrite(purple, LOW);
+    }
+    //purple light on
+    if(data.PM_AE_UG_2_5 > 150 && data.PM_AE_UG_2_5 <= 250) {
+      digitalWrite(green, LOW);
+      digitalWrite(yellow, LOW);
+      digitalWrite(orange, LOW);
+      digitalWrite(red, LOW);
+      digitalWrite(purple, HIGH);
+    }
+    //all lights on
+    if(data.PM_AE_UG_2_5 > 250 && data.PM_AE_UG_2_5 <= 500) {
+      digitalWrite(green, HIGH);
+      digitalWrite(yellow, HIGH);
+      digitalWrite(orange, HIGH);
+      digitalWrite(red, HIGH);
+      digitalWrite(purple, HIGH);
+    }
+    delay(1000);
+  } 
 }
