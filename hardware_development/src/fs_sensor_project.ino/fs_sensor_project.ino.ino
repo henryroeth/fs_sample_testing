@@ -67,6 +67,24 @@ void setup()
   lcd.print("Initializing");
   delay(500);
   lcd.clear();
+  lcd.print("Initializing.");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing..");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing...");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing..");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing.");
+  delay(500);
+  lcd.clear();
+  lcd.print("Initializing");
+  delay(500);
+  lcd.clear();
 }
 
 void loop() {
@@ -132,6 +150,6 @@ void loop() {
       digitalWrite(red, HIGH);
       digitalWrite(purple, HIGH);
     }
-    delay(1000);
+    delay(3000);
   } 
 }
