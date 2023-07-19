@@ -3,11 +3,12 @@
 # reads a specified CSV file
 read_csv = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-17'18.CSV", header = TRUE, stringsAsFactors = FALSE)
 read_csv1 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-14'15.CSV", header = TRUE, stringsAsFactors = FALSE)
-read_csv2 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\2023-07-02'03.CSV", header = TRUE, stringsAsFactors = FALSE)
+read_csv2 = read.csv("C:\\Users\\henry\\fs_sample_testing\\data_records\\averages\\data_avg_sheet.CSV", header = TRUE, stringsAsFactors = FALSE)
 
 # variable names where column data is stored
 file = read_csv
 file1 = read_csv1
+file2 = read_csv2
 
 file_pm2.5 = file$Pm2.5.ug.m3.
 file1_pm2.5 = file1$Pm2.5.ug.m3.
@@ -19,6 +20,8 @@ file_wind_direction = file$Wind.Direction...
 file1_wind_direction = file1$Wind.Direction...
 file_rain = file$Daily.Rain.in.
 file1_rain = file1$Daily.Rain.in.
+file2_wind = file2$Wind
+file2_pm2.5 = file2$Pm.2.5
 
 # graph labels
 
@@ -36,7 +39,7 @@ median <- result <- median(file_pm2.5) #median
 median
 # stores csv file data into a frame
 
-df <- data.frame(x = file_wind_direction , y = file_pm2.5)
+df <- data.frame(x = file_wind , y = file_pm2.5)
 df1 <- data.frame(x = file1_wind, y = file1_pm2.5)
 
 # creates a plot using 'df' where file data was stored
