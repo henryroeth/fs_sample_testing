@@ -23,8 +23,8 @@ print(wind_readings)
 
 plt.yscale('symlog')
 
-x1 = time #[1:len(time):60]
-y1 = pm_readings #[1:len(pm_readings):60]
+x1 = time #[1:len(time):1]
+y1 = pm_readings #[1:len(pm_readings):1]
 
 
 
@@ -32,13 +32,13 @@ y1 = pm_readings #[1:len(pm_readings):60]
 plt.plot(x1, y1, color = 'cyan', label = "PM2.5(ug/m3)")
 plt.grid()
 # line 2 points
-x2 = time #[1:len(time):60]
-y2 = wind_readings #[1:len(wind_readings):60]
+x2 = time #[1:len(time):1]
+y2 = wind_readings #[1:len(wind_readings):1]
 # plotting the line 2 points 
 plt.plot(x2, y2, color = 'violet', label = "Wind Speed(mph)")
 
-# x3 = time[1:len(time):60]
-# y3 = wind_directions[1:len(wind_directions):60]
+#x3 = time[1:len(time):60]
+#y3 = wind_directions[1:len(wind_directions):60]
 # # plotting the line 2 points 
 # plt.plot(x2, y2, label = "Wind Direction")
   
