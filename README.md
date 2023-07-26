@@ -3,12 +3,12 @@
 ### By Henry Roeth
 
 ## Contents
-##### [Data Records](https://github.com/henryroeth/fs_sample_testing#data-records)
-##### [Data Analysis](https://github.com/henryroeth/fs_sample_testing#data-analysis)
-##### [Data Presentation](https://github.com/henryroeth/fs_sample_testing#data-presentation)
-##### [Hardware Development](https://github.com/henryroeth/fs_sample_testing#hardware-development)
-##### [Research & Corroboration](https://github.com/henryroeth/fs_sample_testing#research--corroboration)
-##### [Hiram Connect Reflection](https://github.com/henryroeth/fs_sample_testing#hiram-connect-reflection)
+[Data Records](https://github.com/henryroeth/fs_sample_testing#data-records) <br />
+[Data Analysis](https://github.com/henryroeth/fs_sample_testing#data-analysis) <br />
+[Data Presentation](https://github.com/henryroeth/fs_sample_testing#data-presentation) <br />
+[Hardware Development](https://github.com/henryroeth/fs_sample_testing#hardware-development) <br />
+[Research & Corroboration](https://github.com/henryroeth/ fs_sample_testing#research--corroboration) <br />
+[Hiram Connect Reflection](https://github.com/henryroeth/fs_sample_testing#hiram-connect-reflection) <br />
 
 #### Site Supervisor
 [James Kercher, Ph.D.](https://www.hiram.edu/faculty-and-staff/james-kercher/)
