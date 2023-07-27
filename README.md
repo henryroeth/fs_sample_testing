@@ -31,6 +31,7 @@ Throughout the data analysis process, I took on a very programmatical approach. 
 
 ### Data Presentation
 ![Plot](https://github.com/henryroeth/fs_sample_testing/blob/main/data_presentation/2023-06-29&30(sinusoidal_regression).png?raw=true)
+![Plot](https://github.com/henryroeth/fs_sample_testing/blob/main/data_presentation/standardized_residual_plot.png?raw=true)
 ![Plot](https://github.com/henryroeth/fs_sample_testing/blob/main/data_presentation/2023-06-28&29(plot).png?raw=true)
 
 ### Hardware Development
