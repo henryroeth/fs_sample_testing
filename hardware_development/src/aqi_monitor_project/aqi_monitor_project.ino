@@ -15,11 +15,12 @@ MHZ19 myMHZ19;                                             // Constructor for MH
 SoftwareSerial mySerial(RX_PIN, TX_PIN);                   // Uno example
 //HardwareSerial mySerial(1);                              // ESP32 Example
 
-unsigned long getDataTimer = 0;                             // Variable to store timer interval
+                            // Variable to store timer interval
 
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
+  pmsSerial.begin(9600);
   while (!Serial)
   ; // wait for serial port to connect. Needed for native USB port only
   Serial.print("Initializing SD card...");
@@ -29,20 +30,15 @@ void setup()
     while (1);
   }
   Serial.println("initialization done.");
-  delay(2000);                                     // For ESP32 baudarte is 115200 etc.
-    mySerial.begin(BAUDRATE);                               // Uno example: Begin Stream with MHZ19 baudrate
-    myMHZ19.begin(mySerial);                                // *Important, Pass your Stream reference 
-    myMHZ19.autoCalibration(); 
-    MQ131.begin(4, A0, LOW_CONCENTRATION,1000000);
-    MQ131.calibrate();
+  delay(2000);                                  // For ESP32 baudarte is 115200 etc. 
     dataFile = SD.open("AQI_data.csv", FILE_WRITE); 
-    dataFile.println("Elapsed Time(minutes),CO2(ppm),Ozone(ppm)");
+    dataFile.println("Elapsed Time(minutes),PM2.5(ug/m3),PM10(ug/m3)");
     dataFile.close();                            // Turn auto calibration ON (disable with autoCalibration(false))
 }
 
 uint16_t line = 1;
 void loop(){
-  int CO2; 
+
   dataFile = SD.open("AQI_data.csv", FILE_WRITE);                                          
 
   if(dataFile) {
