@@ -1,9 +1,14 @@
 #include "SoftwareSerial.h"
 #include <SPI.h>
 #include <SD.h> 
+#include "MQ131.h"
  
 SoftwareSerial pmsSerial(2, 3); // RX, TX
 File dataFile;  
+const float S_analog = 1023.0;
+ 
+int co, nh3; 
+float no2;
  
 void setup()
 {
@@ -17,10 +22,10 @@ void setup()
     while (1);
   }
   Serial.println("initialization done.");
-  delay(2000);
+  delay(2000);   
   pmsSerial.begin(9600);
   dataFile = SD.open("AQI_data.csv", FILE_WRITE); 
-  dataFile.println("Seconds,PM2.5(ug/m3),PM10(ug/m3),O3(ppm),NO2(ppm),CO(ppm)");
+  dataFile.println("Seconds,PM2.5(ug/m3),PM10(ug/m3),NO2(ppm),CO(ppm)");
   dataFile.close(); 
 }
  
@@ -34,21 +39,30 @@ struct pms5003data {
 };
  
 struct pms5003data data;
-uint16_t line = 1;
+uint16_t line = 1; 
 
-void loop()
-{
+void loop() {
   dataFile = SD.open("AQI_data.csv", FILE_WRITE);
-    if (readPMSdata(&pmsSerial)) {
-      Serial.print("PM 1.0: "); Serial.println(data.pm10_standard);
-      Serial.print("PM 2.5: "); Serial.println(data.pm25_standard);
-      Serial.print("PM 10: "); Serial.println(data.pm100_standard);
+  co = map (analogRead(A0), 0, S_analog, 1, 1000);
+  nh3 = map (analogRead(A1), 0, S_analog, 1, 500); 
+  no2 = (map (analogRead(A2), 0, S_analog, 5, 1000)) / 100.0 ;
+  if (readPMSdata(&pmsSerial)) {
+    delay(1000);
+    Serial.print("PM1.0: "); Serial.print(data.pm10_standard); Serial.println("(ug/m3)");
+    Serial.print("PM2.5: "); Serial.print(data.pm25_standard); Serial.println("(ug/m3)");
+    Serial.print("PM10: "); Serial.print(data.pm100_standard); Serial.println("(ug/m3");
+    Serial.print("NO2: "); Serial.print(no2); Serial.println("(ppm)");
+    Serial.print("CO: "); Serial.print(co); Serial.println("(ppm)");
 
-      dataFile.print(line++);
-      dataFile.print(",");
-      dataFile.print(data.pm25_standard);
-      dataFile.print(",");
-      dataFile.println(data.pm100_standard);
+    dataFile.print(line++);
+    dataFile.print(",");
+    dataFile.print(data.pm25_standard);
+    dataFile.print(",");
+    dataFile.print(data.pm100_standard);
+    dataFile.print(",");
+    dataFile.print(no2);
+    dataFile.print(",");
+    dataFile.println(co);
   }
   dataFile.close();
 }
