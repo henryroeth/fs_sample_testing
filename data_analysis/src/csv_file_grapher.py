@@ -43,11 +43,11 @@ plt.plot(x2, y2, color = 'violet', label = "Wind Speed(mph)")
 # plt.plot(x2, y2, label = "Wind Direction")
   
 # naming the x axis
-plt.xlabel('Time(hrs)')
+plt.xlabel('Time(days)')
 # naming the y axis
 plt.ylabel('Pm2.5(ug/m3)/Wind(mph)')
 # giving a title to my graph
-plt.title('Pm2.5 Readings Over Time 2023-06-28(10am)-29(10am)')
+plt.title('Pm2.5/Wind Correlations In July')
 ax = plt.gca()
 ax.set_xticklabels(ax.get_xticks(), rotation = 45)
 ax.set_yticklabels(ax.get_yticks(), rotation = 0)
