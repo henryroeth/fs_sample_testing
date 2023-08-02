@@ -36,7 +36,9 @@ Throughout the data analysis process, I took on a very programmatical approach. 
 ![Plot](https://github.com/henryroeth/fs_sample_testing/blob/main/data_presentation/2023-06-28&29(plot).png?raw=true)
 
 ### Hardware Development
-
+![co2_ndir_display](https://github.com/henryroeth/fs_sample_testing/blob/main/hardware_development/cos_ndir_display.jpeg?raw=true)
+![indoor_pms_display](https://github.com/henryroeth/fs_sample_testing/blob/main/hardware_development/indoor_pms_display.jpeg?raw=true)
+![mobile_pms_logger](https://github.com/henryroeth/fs_sample_testing/blob/main/hardware_development/mobile_pms_logger.jpeg?raw=true)
 
 ### Research & Corroboration
 
