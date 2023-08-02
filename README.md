@@ -37,8 +37,13 @@ Throughout the data analysis process, I took on a very programmatical approach. 
 
 ### Hardware Development
 ![co2_ndir_display](https://github.com/henryroeth/fs_sample_testing/blob/main/hardware_development/cos_ndir_display.jpeg?raw=true)
+<sub>This is an indoor CO2 NDIR display that captures CO2 levels in parts per million. This is much more accurate than a typical CO2 reading sensor. This is because instead of using a simple filtration system to measure CO2 molecules, it uses nondispersive infrared readings, using and IR lamp that projects IR wavelengths into a sample of air within a tube. An optical filter reads the amount of IR light that passes through, yielding a highly accurate measure of CO2 within the representative sample of air.</sub>
+
 ![indoor_pms_display](https://github.com/henryroeth/fs_sample_testing/blob/main/hardware_development/indoor_pms_display.jpeg?raw=true)
+<sub></sub>
+
 ![mobile_pms_logger](https://github.com/henryroeth/fs_sample_testing/blob/main/hardware_development/mobile_pms_logger.jpeg?raw=true)
+<sub></sub>
 
 ### Research & Corroboration
 
