@@ -6,7 +6,7 @@
 [Data Records](https://github.com/henryroeth/fs_sample_testing#data-records) <br />
 [Data Analysis](https://github.com/henryroeth/fs_sample_testing#data-analysis) <br />
 [Data Presentation](https://github.com/henryroeth/fs_sample_testing#data-presentation) <br />
-[Hardware Development](https://github.com/henryroeth/fs_sample_testing#hardware-development) <br />
+[Hardware-Software Integration](https://github.com/henryroeth/fs_sample_testing#hardware-development) <br />
 [Research & Corroboration](https://github.com/henryroeth/fs_sample_testing#research--corroboration) <br />
 [Hiram Connect Reflection](https://github.com/henryroeth/fs_sample_testing#hiram-connect-reflection) <br />
 
@@ -35,7 +35,7 @@ Throughout the data analysis process, I took on a very programmatic approach. Th
 ![Plot](https://github.com/henryroeth/fs_sample_testing/blob/main/data_presentation/standardized_residual_plot.png?raw=true)
 ![Plot](https://github.com/henryroeth/fs_sample_testing/blob/main/data_presentation/2023-06-28&29(plot).png?raw=true)
 
-### Hardware Development
+### Hardware-Software Integration
 ![co2_ndir_display](https://github.com/henryroeth/fs_sample_testing/blob/main/hardware_development/cos_ndir_display.jpeg?raw=true)
 <sub>This is an indoor CO2 NDIR display that captures CO2 levels in parts per million. This is much more accurate than a typical CO2 sensor. This is because instead of using a simple filtration system to measure CO2 molecules, it uses nondispersive infrared readings, using a lamp that projects infrared wavelengths of light into a sample of air within a tube. An optical filter then reads the amount of infrared light that passes through, yielding a highly accurate measurement of CO2 within a representative sample of air.</sub>
 
