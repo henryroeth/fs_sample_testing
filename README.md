@@ -6,7 +6,7 @@
 [Data Records](https://github.com/henryroeth/fs_sample_testing#data-records) <br />
 [Data Analysis](https://github.com/henryroeth/fs_sample_testing#data-analysis) <br />
 [Data Presentation](https://github.com/henryroeth/fs_sample_testing#data-presentation) <br />
-[Hardware-Software Integration](https://github.com/henryroeth/fs_sample_testing#hardware-development) <br />
+[Hardware-Software Integration](https://github.com/henryroeth/fs_sample_testing#hardware-software-integration) <br />
 [Research & Corroboration](https://github.com/henryroeth/fs_sample_testing#research--corroboration) <br />
 [Hiram Connect Reflection](https://github.com/henryroeth/fs_sample_testing#hiram-connect-reflection) <br />
 
