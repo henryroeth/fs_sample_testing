@@ -1,5 +1,5 @@
-# James H. Barrow Biological Field Station Internship
-### Development & Deployment of Weather and Trace Gas Monitoring Systems
+# James H. Barrow Biological Field Station Research Internship
+### Development, Deployment, and Data Analysis of Weather and Trace Gas Monitoring Systems
 ### By Henry Roeth
 
 ## Contents
